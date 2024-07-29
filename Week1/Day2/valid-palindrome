@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool isPalindrome(string s) { 
+        string n = "";
+        for(char a: s){
+            if(isalnum(a)){
+                n+=tolower(a);
+            }
+        }
+        string rev=n;
+        reverse(n.begin(),n.end());
+        return rev==n;
+    }
+};
