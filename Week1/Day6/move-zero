@@ -1,0 +1,18 @@
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+     //use two pointer j-for current position to place and i-loop variable
+
+        int e = nums.size() - 1;
+        int j = 0;
+
+        for (int i = 0; i <= e; i++) {
+            if (nums[i] != 0) {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        for (int k = j; k <= e; k++)
+            nums[k] = 0;
+    }
+};
