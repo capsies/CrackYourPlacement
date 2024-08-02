@@ -1,0 +1,24 @@
+//use mid pointer for checking and swapping
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int s=0; //start pointer for 0's
+        int m=0; //middle pointer for 1's
+        int e=nums.size()-1; //end pointer for 2's
+        while(m<=e){
+            if(nums[m]==2){
+                swap(nums[m],nums[e]);
+                e--;
+            }
+            else if(nums[m]==0){
+                swap(nums[s],nums[m]);
+                s++;
+                m++;
+            }
+            else {
+                m++;
+            }
+        }
+    }
+};
