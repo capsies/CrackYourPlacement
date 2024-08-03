@@ -1,0 +1,11 @@
+class Solution:
+    def removeDigit(self, number: str, digit: str) -> str:
+        l=len(number)
+        c=0
+        for i in range(len(number)):
+            if number[i]==digit:
+                ans=number[0:i]+number[i+1:]
+                if ans.strip():  # Check if ans is not empty
+                    a = int(ans)
+                c=max(c,a)
+        return str(c)
