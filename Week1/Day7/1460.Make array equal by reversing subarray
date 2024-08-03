@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool canBeEqual(vector<int>& target, vector<int>& arr) {
+        if(arr.size()!=target.size())return false;
+        unordered_map<int,int> map;
+        for(auto i: target){
+            if(map.find(i)==map.end()){
+                map[i]=1;
+            }
+            else map[i]++;
+        }
+        for(auto i:arr){
+            if(map.find(i)==map.end()){
+                return false;
+            }
+            else map[i]--;
+        }
+
+        for(auto i:map){
+            if(i.second!=0)return false;
+        }
+        
+        return true;
+    }
+};
