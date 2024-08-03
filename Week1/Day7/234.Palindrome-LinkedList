@@ -1,0 +1,92 @@
+//method -1 using stack - tc:O(N) sc:O(N)
+
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<int> st;
+        vector<int> rev;
+        ListNode* temp1 = head;
+        ListNode* temp2 = head;
+        
+        while (temp1 != nullptr) {
+            st.push(temp1->val);
+            temp1 = temp1->next;
+        }
+        
+        int n = st.size();
+        while (!st.empty()) {
+            rev.push_back(st.top());
+            st.pop();
+        }
+        
+        int i = 0;
+        while (n != 0) {
+            n--;
+            if (rev[i] != temp2->val) {
+                return false;
+            }
+            temp2 = temp2->next;
+            i++;
+        }
+        return true;
+    }
+};
+
+
+//method 2 use slow and fast pointers to reverse - tc:O(N) , sc:O(1)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+    ListNode* reverse(ListNode* head){
+        ListNode* curr=head;
+        ListNode* prev=nullptr;
+        ListNode* next=nullptr;
+        while(curr!=nullptr){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+public:
+    bool isPalindrome(ListNode* head) {
+        //stack<int> st; 
+        //vector<int> rev;
+        ListNode* temp1=head;
+        ListNode* temp=head;
+        ListNode* slow=head;
+        ListNode* fast=head;
+
+        if (head == nullptr || head->next == nullptr) {
+            return true; // Empty list or single node list is a palindrome
+        }
+        
+
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+            temp=reverse(slow);
+        //int n=st.size();
+        
+        while(temp!=nullptr){ //temp points to second half while temp1 points to whole list ...so use temp instead
+            if(temp1->val!=temp->val){
+                return false;
+            }
+            temp=temp->next;
+            temp1=temp1->next;
+        }
+        return true;
+    }
+};
