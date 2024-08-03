@@ -1,0 +1,27 @@
+class Solution(object):
+    def pap(self, a,b,n,ind,oc,cc):
+        if ind==n:
+            s=''
+            for i in a:
+                s+=i
+            b.append(str(s))
+            return 
+
+        if oc<n/2:
+            a[ind]='('
+            self.pap(a,b,n,ind+1,oc+1,cc)
+        if cc<oc:
+            a[ind]=')'
+            self.pap(a,b,n,ind+1,oc,cc+1)
+
+    def generateParenthesis(self, n):
+        a=["_" for i in range(2*n)]
+        b=[]
+        self.pap(a,b,2*n,0,0,0)
+        return b
+
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        
